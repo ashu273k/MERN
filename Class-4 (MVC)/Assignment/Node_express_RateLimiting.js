@@ -6,3 +6,29 @@ Utilize the express-rate-limit library to create a middleware that can keep trac
 
 Write your code in src/api.js
  */
+/*********************code to be  written in the stub*************************/
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const app = express();
+
+/**
+ * Rate-limiting middleware for Express
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next function
+ */
+
+// Configure the rate limiting middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per window
+});
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+module.exports = app;
